@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class StaticEnemy : EnemyController
 {
-    void Start()
-    {
-        player = GameObject.Find("Player");
-        currentState.OnStateEnter(this);
-    }
-
     void Update()
     {
         currentState.OnStateUpdate(this);

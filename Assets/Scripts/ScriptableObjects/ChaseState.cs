@@ -12,9 +12,11 @@ public class ChaseState : StatesSO
 
     public override void OnStateExit(EnemyController ec)
     {
+        ec.chase.StopChase();
     }
 
     public override void OnStateUpdate(EnemyController ec)
     {
+        ec.chase.Chase(ec.player.transform, ec.transform);
     }
 }

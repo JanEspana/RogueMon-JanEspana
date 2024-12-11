@@ -8,6 +8,7 @@ TagManager:
   - RotationPoint
   - Weapon
   - Enemy
+  - Weezing
   layers:
   - Default
   - TransparentFX
