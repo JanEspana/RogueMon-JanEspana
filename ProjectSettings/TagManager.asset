@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Enemy
   - Weezing
+  - Octillery
   layers:
   - Default
   - TransparentFX

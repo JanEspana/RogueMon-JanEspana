@@ -15,10 +15,14 @@ public class AttackState : StatesSO
 
     public override void OnStateUpdate(EnemyController ec)
     {
-        if (ec.tag == "Weezing")
+        switch (ec.enemyType)
         {
-            ec.kaboom.Explode();
-            ec.GoToState<DieState>();
+            case "Weezing":
+                ec.kaboom.Explode();
+                break;
+            case "Octillery":
+                ec.shoot.Shoot();
+                break;
         }
     }
 }

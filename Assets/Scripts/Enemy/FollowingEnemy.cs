@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FollowingEnemy : EnemyController
 {
+    private void OnEnable()
+    {
+        enemyType = "Weezing";
+    }
     void Update()
     {
         currentState.OnStateUpdate(this);

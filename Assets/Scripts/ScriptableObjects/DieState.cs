@@ -8,7 +8,7 @@ public class DieState : StatesSO
     public override void OnStateEnter(EnemyController ec)
     {
         Debug.Log("Die State");
-        ec.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        Destroy(ec.gameObject);
     }
 
     public override void OnStateExit(EnemyController ec)

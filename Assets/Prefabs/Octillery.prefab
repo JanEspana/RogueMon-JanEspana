@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5450158164164788389}
   - component: {fileID: 6207632961862569425}
   - component: {fileID: 5648485090466741186}
+  - component: {fileID: 2343307663205950381}
   - component: {fileID: 3533702975329145431}
   - component: {fileID: 8003045213603574579}
   - component: {fileID: 2751977525080288449}
@@ -18,7 +19,7 @@ GameObject:
   - component: {fileID: 3012183160008261507}
   m_Layer: 0
   m_Name: Octillery
-  m_TagString: Untagged
+  m_TagString: Octillery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 8374517080843584906}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.18, y: 6.57, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -102,11 +103,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a15683f451300e4e814f1d6afed6c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 
   currentState: {fileID: 11400000, guid: 09a3af675ec9e2b46ab906bda88d4aff, type: 2}
   HP: 0
   dmg: 0
   player: {fileID: 0}
   chase: {fileID: 0}
+  kaboom: {fileID: 0}
+  shoot: {fileID: 0}
+  octillery: {fileID: 0}
+--- !u!114 &2343307663205950381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8374517080843584906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d1d68c4cfd5f24184bf0f89b3d5f49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouse: {x: 0, y: 0, z: 0}
+  bullet: {fileID: 0}
+  bulletTransform: {fileID: 0}
+  isObtained: 0
 --- !u!114 &3533702975329145431
 MonoBehaviour:
   m_ObjectHideFlags: 0

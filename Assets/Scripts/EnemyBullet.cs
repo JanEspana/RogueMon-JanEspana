@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : GenericBullet
+public class EnemyBullet : GenericBullet
 {
-    public Vector3 mousePos;
-    private Camera mainCam;
-
-    // Update is called once per frame
+    public GameObject thisOctillery;
     public override void OnCollisionEnter2D(Collision2D collision)
     {
-        lifeTime = 1.5f;
-        Shoot.instance.Push(gameObject);
+        if (!collision.gameObject.CompareTag("Octillery"))
+        {
+            lifeTime = 1.5f;
+            EnemyShoot.instance.Push(gameObject);
+        }
     }
-
     public override void EndOfLifeTime()
     {
         if (lifeTime > 0)
@@ -23,11 +22,11 @@ public class Bullet : GenericBullet
         else
         {
             lifeTime = 1.5f;
-            Shoot.instance.Push(gameObject);
+            EnemyShoot.instance.Push(gameObject);
         }
     }
     public override GameObject FindSpawnPoint()
     {
-        return GameObject.FindGameObjectWithTag("SpawnPoint");
+        return thisOctillery;
     }
 }

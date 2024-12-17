@@ -1359,7 +1359,7 @@ MonoBehaviour:
   mouse: {x: 0, y: 0, z: 0}
   bullet: {fileID: 6499363071302155967, guid: 743fb424ae54233468becbb6d49a3720, type: 3}
   bulletTransform: {fileID: 2080070517}
-  isObtained: 0
+  isObtained: 1
 --- !u!114 &1826930918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,6 +1453,10 @@ PrefabInstance:
     - target: {fileID: 5450158164164788389, guid: 12effb88b756cf94bbd46cb11628e545, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471237259542720918, guid: 12effb88b756cf94bbd46cb11628e545, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8374517080843584906, guid: 12effb88b756cf94bbd46cb11628e545, type: 3}
       propertyPath: m_Name
@@ -1829,11 +1833,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4414707618292132861, guid: fae290192646e464ca6a52a1ee7e5bc1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.59
+      value: -4.09
       objectReference: {fileID: 0}
     - target: {fileID: 4414707618292132861, guid: fae290192646e464ca6a52a1ee7e5bc1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.19
+      value: 3.51
       objectReference: {fileID: 0}
     - target: {fileID: 4414707618292132861, guid: fae290192646e464ca6a52a1ee7e5bc1, type: 3}
       propertyPath: m_LocalPosition.z

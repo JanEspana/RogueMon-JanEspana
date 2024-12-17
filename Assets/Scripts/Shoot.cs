@@ -21,7 +21,7 @@ public class Shoot : MonoBehaviour
     {
         instance = this;
         stack = new Stack<GameObject>();
-        isObtained = false;
+        //isObtained = false;
     }
     // Start is called before the first frame update
     void Start()
