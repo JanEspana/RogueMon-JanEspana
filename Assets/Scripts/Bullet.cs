@@ -7,6 +7,14 @@ public class Bullet : GenericBullet
     public Vector3 mousePos;
     private Camera mainCam;
 
+    public override void OnEnable()
+    {
+        force = 0.5f;
+        lifeTime = 1.5f;
+        rb = GetComponent<Rigidbody2D>();
+        spawnPoint = FindSpawnPoint();
+        rb.AddForce(spawnPoint.transform.right * force, ForceMode2D.Impulse);
+    }
     // Update is called once per frame
     public override void OnCollisionEnter2D(Collision2D collision)
     {

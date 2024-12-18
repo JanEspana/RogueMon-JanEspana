@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class EnemyBullet : GenericBullet
 {
-    public GameObject thisOctillery;
+    public GameObject player;
+    public Vector2 dir;
+    public override void OnEnable()
+    {
+        force = 3f;
+        lifeTime = 1.5f;
+        rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindWithTag("Player");
+        dir = (player.transform.position - transform.position).normalized;
+        rb.velocity = dir * force;
+    }
     public override void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Octillery"))
@@ -27,6 +37,6 @@ public class EnemyBullet : GenericBullet
     }
     public override GameObject FindSpawnPoint()
     {
-        return thisOctillery;
+        return gameObject;
     }
 }

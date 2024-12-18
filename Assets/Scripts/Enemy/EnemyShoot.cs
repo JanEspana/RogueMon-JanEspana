@@ -7,7 +7,8 @@ public class EnemyShoot : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject bulletPrefab;
-    float bulletCooldown = 3;
+    public float totalBulletCooldown;
+    float bulletCooldown;
     Transform bulletSpawn;
     GameObject player;
     Vector3 rotation;
@@ -19,16 +20,20 @@ public class EnemyShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bulletCooldown = totalBulletCooldown;
         player = GameObject.FindWithTag("Player");
-        enemyStack = new Stack<GameObject>();
+        bulletSpawn = transform;
+    }
+    private void Awake()
+    {
+        if (enemyStack == null)
+        {
+            enemyStack = new Stack<GameObject>();
+        }
         instance = this;
     }
     private void Update()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        Vector3 rotation = player.transform.position - transform.position;
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
     }
     // Update is called once per frame
     public GameObject Pop()
@@ -49,13 +54,21 @@ public class EnemyShoot : MonoBehaviour
     }
     public void Shoot()
     {
-        if (enemyStack.Count != 0)
+        if (bulletCooldown > 0)
         {
-            Pop();
+            bulletCooldown -= Time.deltaTime;
         }
         else
         {
-            bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+            bulletCooldown = totalBulletCooldown;
+            if (enemyStack.Count != 0)
+            {
+                Pop();
+            }
+            else
+            {
+                Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
+            }
         }
     }
 }

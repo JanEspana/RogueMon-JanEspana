@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 5450158164164788389}
   - component: {fileID: 6207632961862569425}
   - component: {fileID: 5648485090466741186}
-  - component: {fileID: 2343307663205950381}
+  - component: {fileID: 582188961971820657}
   - component: {fileID: 3533702975329145431}
   - component: {fileID: 8003045213603574579}
   - component: {fileID: 2751977525080288449}
   - component: {fileID: 1659168778085959246}
   - component: {fileID: 3012183160008261507}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Octillery
   m_TagString: Octillery
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   kaboom: {fileID: 0}
   shoot: {fileID: 0}
   octillery: {fileID: 0}
---- !u!114 &2343307663205950381
+--- !u!114 &582188961971820657
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,13 +121,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8374517080843584906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95d1d68c4cfd5f24184bf0f89b3d5f49, type: 3}
+  m_Script: {fileID: 11500000, guid: 02a813147ba417c42ae3eb44a23a3606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouse: {x: 0, y: 0, z: 0}
   bullet: {fileID: 0}
-  bulletTransform: {fileID: 0}
-  isObtained: 0
+  bulletPrefab: {fileID: 6499363071302155967, guid: f58997907a95f054982cf59c6db6c899, type: 3}
+  totalBulletCooldown: 1
 --- !u!114 &3533702975329145431
 MonoBehaviour:
   m_ObjectHideFlags: 0

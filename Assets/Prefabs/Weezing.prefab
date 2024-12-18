@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8792461677555266704}
   - component: {fileID: 8686809519771124548}
   - component: {fileID: -3491096801384095919}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weezing
   m_TagString: Weezing
   m_Icon: {fileID: 0}
@@ -117,12 +117,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1aa8543ea77db43930d1fe7b7ac689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 
   currentState: {fileID: 11400000, guid: 09a3af675ec9e2b46ab906bda88d4aff, type: 2}
   HP: 0
   dmg: 0
   player: {fileID: 0}
   chase: {fileID: 0}
   kaboom: {fileID: 0}
+  shoot: {fileID: 0}
 --- !u!114 &173893566736810098
 MonoBehaviour:
   m_ObjectHideFlags: 0

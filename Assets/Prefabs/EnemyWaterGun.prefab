@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7078849497391359446}
   - component: {fileID: 544816838543762959}
-  - component: {fileID: -1593817200598856981}
+  - component: {fileID: 7302159650472601250}
   - component: {fileID: 3955881108046248941}
   - component: {fileID: 3033141954406280576}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyWaterGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-1593817200598856981
+--- !u!114 &7302159650472601250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,12 +96,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6499363071302155967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e946423c9d4cad438543e1bf70fd66c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ada6bed694311c49bff0f5807ac96f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 0.5
-  lifeTime: 1.5
-  mousePos: {x: 0, y: 0, z: 0}
+  rb: {fileID: 0}
+  force: 0
+  lifeTime: 0
+  spawnPoint: {fileID: 0}
+  player: {fileID: 0}
 --- !u!50 &3955881108046248941
 Rigidbody2D:
   serializedVersion: 4
