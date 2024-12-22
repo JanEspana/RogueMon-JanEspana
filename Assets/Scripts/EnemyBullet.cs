@@ -5,15 +5,17 @@ using UnityEngine;
 public class EnemyBullet : GenericBullet
 {
     public GameObject player;
-    public Vector2 dir;
+    public Vector3 dir;
     public override void OnEnable()
     {
-        force = 3f;
+
+        force = 0.3f;
         lifeTime = 1.5f;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
-        dir = (player.transform.position - transform.position).normalized;
-        rb.velocity = dir * force;
+        spawnPoint = FindSpawnPoint();
+        dir = (player.transform.position - spawnPoint.transform.position).normalized;
+        rb.AddForce(dir * force, ForceMode2D.Impulse);
     }
     public override void OnCollisionEnter2D(Collision2D collision)
     {
@@ -38,5 +40,11 @@ public class EnemyBullet : GenericBullet
     public override GameObject FindSpawnPoint()
     {
         return gameObject;
+    }
+
+    IEnumerator TryAgain()
+    {
+        yield return new WaitForSeconds(0.1f);
+        OnEnable();
     }
 }

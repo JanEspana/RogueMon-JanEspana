@@ -11,9 +11,6 @@ public class EnemyShoot : MonoBehaviour
     float bulletCooldown;
     Transform bulletSpawn;
     GameObject player;
-    Vector3 rotation;
-    float rotZ;
-    StatesSO octState;
 
     public static EnemyShoot instance;
     public Stack<GameObject> enemyStack;
@@ -67,7 +64,7 @@ public class EnemyShoot : MonoBehaviour
             }
             else
             {
-                Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
+                bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
             }
         }
     }
