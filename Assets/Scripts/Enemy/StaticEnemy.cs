@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class StaticEnemy : EnemyController
 {
-    void Start()
+    public Transform octillery;
+    private void OnEnable()
     {
-        player = GameObject.Find("Player");
-        currentState.OnStateEnter(this);
+        enemyType = "Octillery";
+        octillery = GetComponent<Transform>();
     }
-
     void Update()
     {
         currentState.OnStateUpdate(this);

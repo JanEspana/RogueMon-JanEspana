@@ -15,5 +15,14 @@ public class AttackState : StatesSO
 
     public override void OnStateUpdate(EnemyController ec)
     {
+        switch (ec.enemyType)
+        {
+            case "Weezing":
+                ec.kaboom.Explode();
+                break;
+            case "Octillery":
+                ec.shoot.Shoot();
+                break;
+        }
     }
 }
