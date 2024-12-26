@@ -11,8 +11,8 @@ public class DungeonGen : MonoBehaviour
     private Queue<Room> roomsPending;
     private List<Room> dungeonRooms;
     private List<GameObject> roomInstances;
-    public List<GameObject> roomPrefabs;
-    private List<GameObject> enemyPrefabs, enemyInstances;
+    public List<GameObject> roomPrefabs, enemyPrefabs;
+    private List<GameObject> enemyInstances;
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -21,6 +21,7 @@ public class DungeonGen : MonoBehaviour
         CheckPositions();
         AssignNeighbours();
         EnableDoors();
+        GenerateEnemies();
     }
 
     void GenerateDungeon()
@@ -33,10 +34,8 @@ public class DungeonGen : MonoBehaviour
         maxRooms = UnityEngine.Random.Range(7, 10) + 1;
         for (int i = 0; i < maxRooms; i++)
         {
-            Debug.Log("Creating Room " + i);
             Transform roomPosition = null;
 
-            //new room equals to the instance of the prefab
             Room newRoom = new Room(0, 0);
             Room previousRoom = new Room(0, 0);
 
@@ -64,7 +63,6 @@ public class DungeonGen : MonoBehaviour
                 if (previousRoom.isStartRoom)
                 {
                     direction = Directions.UP;
-                    Debug.Log("Start Room");
                 }
                 else
                 {
@@ -72,13 +70,11 @@ public class DungeonGen : MonoBehaviour
                     {
                         direction = (Directions)UnityEngine.Random.Range(0, 4);
                     } while (newRoom.GetDirection(previousRoom) == direction);
-                    Debug.Log("Random Room");
                 }
                 roomPosition = newRoom.transform;
                 MoveRoom(newRoom, direction);
             }
 
-            Debug.Log("Room " + roomInstances[i] + " created");
         }
     }
     Room SearchStartRoom()
@@ -172,14 +168,6 @@ public class DungeonGen : MonoBehaviour
                 }
             }
         }
-        //check if the neighbours are correct
-        foreach (Room room in dungeonRooms)
-        {
-            foreach (Tuple<Directions, Room> neighbour in room.neighbourRooms)
-            {
-                Debug.Log("Room " + room + " has neighbour " + neighbour.Item2 + " in direction " + neighbour.Item1);
-            }
-        }
     }
     public void EnableDoors()
     {
@@ -189,6 +177,27 @@ public class DungeonGen : MonoBehaviour
             foreach (GameObject door in room.doors)
             {
                 door.GetComponent<Door>().CheckRoom(door);
+            }
+        }
+    }
+    public void GenerateEnemies()
+    {
+        //generate enemies in the dungeon
+        for (int i = 0; i < dungeonRooms.Count; i++)
+        {
+            Room room = dungeonRooms[i];
+            if (!room.isStartRoom)
+            {
+                int enemyCount = UnityEngine.Random.Range(1, 4);
+                for (int j = 0; j < enemyCount; j++)
+                {
+                    GameObject newEnemy, previousEnemy;
+                    Vector3 offset = new Vector3(UnityEngine.Random.Range(-5, 5), UnityEngine.Random.Range(-3, 3), 0);
+                    Debug.Log("Generating enemies in room " + room);
+                    int randomEnemy = UnityEngine.Random.Range(0, enemyPrefabs.Count);
+                    newEnemy = Instantiate(enemyPrefabs[randomEnemy], room.transform.position + offset, Quaternion.identity);
+                    enemyInstances.Add(newEnemy);
+                }
             }
         }
     }
