@@ -11,7 +11,7 @@ public class DungeonGen : MonoBehaviour
     private Queue<Room> roomsPending;
     private List<Room> dungeonRooms;
     private List<GameObject> roomInstances;
-    public List<GameObject> roomPrefabs, enemyPrefabs;
+    public List<GameObject> roomPrefabs, enemyPrefabs, propPrefabs;
     private List<GameObject> enemyInstances;
     void Awake()
     {
@@ -193,10 +193,16 @@ public class DungeonGen : MonoBehaviour
                 {
                     GameObject newEnemy, previousEnemy;
                     Vector3 offset = new Vector3(UnityEngine.Random.Range(-5, 5), UnityEngine.Random.Range(-3, 3), 0);
-                    Debug.Log("Generating enemies in room " + room);
+                    Vector3 enemyPosition = room.transform.position + offset;
+                    while (Physics2D.OverlapCircle(enemyPosition, 1, LayerMask.GetMask("Void")))
+                    {
+                        offset = new Vector3(UnityEngine.Random.Range(-5, 5), UnityEngine.Random.Range(-3, 3), 0);
+                        enemyPosition = room.transform.position + offset;
+                    }
                     int randomEnemy = UnityEngine.Random.Range(0, enemyPrefabs.Count);
-                    newEnemy = Instantiate(enemyPrefabs[randomEnemy], room.transform.position + offset, Quaternion.identity);
+                    newEnemy = Instantiate(enemyPrefabs[randomEnemy], enemyPosition, Quaternion.identity);
                     enemyInstances.Add(newEnemy);
+                    room.AddEnemy(newEnemy);
                 }
             }
         }

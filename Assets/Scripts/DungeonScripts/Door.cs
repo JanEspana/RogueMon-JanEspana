@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class Door : MonoBehaviour
 {
-    public bool isOpen;
+    public bool isValid;
     public Room room;
     TilemapRenderer doorSprite;
     BoxCollider2D doorCollider;
@@ -17,15 +17,16 @@ public class Door : MonoBehaviour
         doorSprite.enabled = false;
         doorCollider = GetComponent<BoxCollider2D>();
         doorCollider.enabled = false;
-        isOpen = false;
+        isValid = false;
     }
     void Update()
     {
         OpenDoor();
+        CheckEnemies();
     }
     public void OpenDoor()
     {
-        if (isOpen)
+        if (isValid)
         {
             doorSprite.enabled = true;
             doorCollider.enabled = true;
@@ -61,13 +62,25 @@ public class Door : MonoBehaviour
         {
             if (neighbour.Item1 == DoorDirection())
             {
-                isOpen = true;
+                isValid = true;
             }
+        }
+    }
+    public void CheckEnemies()
+    {
+        float totalLife = 0;
+        foreach (GameObject enemy in room.enemies)
+        {
+            totalLife += enemy.GetComponent<EnemyController>().HP;
+        }
+        if (totalLife <= 0 || room.enemies.Count == 0)
+        {
+            room.isOpen = true;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && room.isOpen)
         {
             GameObject player = collision.gameObject;
             Directions doorDirection = DoorDirection();

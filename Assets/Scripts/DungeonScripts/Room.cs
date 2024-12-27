@@ -8,8 +8,9 @@ public class Room : MonoBehaviour
     public bool isStartRoom;
     public List<Tuple<Directions, Room>> neighbourRooms;
     public int xPos, yPos;
-    public List<GameObject> doors;
+    public List<GameObject> doors, enemies;
     public DungeonGen dungeonGen;
+    public bool isOpen = false;
     public Room(int x, int y)
     {
         xPos = x;
@@ -24,7 +25,14 @@ public class Room : MonoBehaviour
         }
         neighbourRooms.Add(new Tuple<Directions, Room>(up, otherRoom));
     }
-
+    internal void AddEnemy(GameObject enemy)
+    {
+        if (enemies == null)
+        {
+            enemies = new List<GameObject>();
+        }
+        enemies.Add(enemy);
+    }
     internal Directions GetDirection(Room previousRoom)
     {
         if (previousRoom.xPos == xPos)

@@ -3498,7 +3498,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 1
   room: {fileID: -2951406450801023660}
-  destination: {fileID: 0}
 --- !u!61 &1554661405731768414
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3705,7 +3704,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   room: {fileID: -2951406450801023660}
-  destination: {fileID: 0}
 --- !u!483693784 &8521401479410555155
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -3949,7 +3947,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   room: {fileID: -2951406450801023660}
-  destination: {fileID: 0}
 --- !u!483693784 &1540143337526112050
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -4254,7 +4251,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpen: 0
   room: {fileID: -2951406450801023660}
-  destination: {fileID: 0}
 --- !u!61 &8586896740615288731
 BoxCollider2D:
   m_ObjectHideFlags: 0

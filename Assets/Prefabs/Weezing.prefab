@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -788321740, guid: e469904c85087224bb596863c85a7f5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 
   currentState: {fileID: 11400000, guid: 09a3af675ec9e2b46ab906bda88d4aff, type: 2}
-  HP: 0
+  HP: 10
   dmg: 0
   player: {fileID: 0}
   chase: {fileID: 0}
