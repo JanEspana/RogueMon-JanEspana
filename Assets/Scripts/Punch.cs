@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Punch : MonoBehaviour
@@ -13,6 +14,8 @@ public class Punch : MonoBehaviour
     private float playerForce;
     //direction of the player
     private Vector2 playerDir;
+
+    float dmg = 3f;
 
     private Camera cam;
     private Vector2 mousePos;
@@ -41,7 +44,11 @@ public class Punch : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         lifeTime = 0.5f;
-        Melee.instance.Push(gameObject);
+        if (collision.gameObject.layer == 6)
+        {
+            collision.gameObject.GetComponent<EnemyController>().TakeDamage(dmg);
+            rb.AddForce(spawnPoint.transform.right * force, ForceMode2D.Impulse);
+        }
     }
     void EndOfLifeTime()
     {

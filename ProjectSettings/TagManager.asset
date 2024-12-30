@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Weezing
   - Octillery
+  - Room
   layers:
   - Default
   - TransparentFX
@@ -19,10 +20,10 @@ TagManager:
   - UI
   - Enemy
   - EnemyProjectiles
-  - 
-  - 
-  - 
-  - 
+  - Room
+  - Doors
+  - Void
+  - PlayerProjectiles
   - 
   - 
   - 

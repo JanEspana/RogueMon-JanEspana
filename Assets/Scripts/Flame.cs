@@ -7,9 +7,11 @@ public class Flame : MonoBehaviour
     private Vector3 mouse, rotation;
     float rotZ;
     private GameObject spawnPoint;
+    Rigidbody2D rb;
     // Start is called before the first frame update
     void OnEnable()
     {
+        rb = GetComponent<Rigidbody2D>();
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
         mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         rotation =  mouse - spawnPoint.transform.position;
@@ -21,5 +23,13 @@ public class Flame : MonoBehaviour
     void Update()
     {
 
+    }
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.gameObject.layer == 6)
+        {
+            float dmg = Random.Range(0.1f, 0.5f);
+            other.GetComponent<EnemyController>().TakeDamage(dmg);
+        }
     }
 }
