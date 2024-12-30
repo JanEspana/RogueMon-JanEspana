@@ -68,15 +68,14 @@ public class Door : MonoBehaviour
     }
     public void CheckEnemies()
     {
-        float totalLife = 0;
         foreach (GameObject enemy in room.enemies)
         {
-            totalLife += enemy.GetComponent<EnemyController>().HP;
+            if (enemy != null)
+            {
+                return;
+            }
         }
-        if (totalLife <= 0 || room.enemies.Count == 0)
-        {
-            room.isOpen = true;
-        }
+        room.isOpen = true;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

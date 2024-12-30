@@ -63,19 +63,34 @@ public class DungeonGen : MonoBehaviour
                 if (previousRoom.isStartRoom)
                 {
                     direction = Directions.UP;
+                    MoveRoom(newRoom, direction);
                 }
                 else
                 {
                     do
                     {
                         direction = (Directions)UnityEngine.Random.Range(0, 4);
-                    } while (newRoom.GetDirection(previousRoom) == direction);
+                        MoveRoom(newRoom, direction);
+                    } while (IsOverlaping(newRoom));
                 }
                 roomPosition = newRoom.transform;
-                MoveRoom(newRoom, direction);
             }
 
         }
+    }
+    bool IsOverlaping(Room room)
+    {
+        foreach (Room otherRoom in dungeonRooms)
+        {
+            if (room != otherRoom)
+            {
+                if (room.transform.position == otherRoom.transform.position)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     Room SearchStartRoom()
     {

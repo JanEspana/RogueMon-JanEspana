@@ -300,9 +300,11 @@ MonoBehaviour:
   roomPrefabs:
   - {fileID: 5321061174420741669, guid: 9684ed6d1bafa534a95efc840afd31bb, type: 3}
   - {fileID: 5321061174420741669, guid: 0d1697a2f57a9ff4da04aac213a200b6, type: 3}
+  - {fileID: 5321061174420741669, guid: b9d704c70ace3794fabb67d7c39f3efa, type: 3}
   enemyPrefabs:
   - {fileID: 8374517080843584906, guid: 12effb88b756cf94bbd46cb11628e545, type: 3}
   - {fileID: 8416516802035981904, guid: fae290192646e464ca6a52a1ee7e5bc1, type: 3}
+  propPrefabs: []
 --- !u!156049354 &446341736
 Grid:
   m_ObjectHideFlags: 0

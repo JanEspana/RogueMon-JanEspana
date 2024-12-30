@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : GenericBullet
 {
     public Vector3 mousePos;
+    float dmg = 2f;
     private Camera mainCam;
 
     public override void OnEnable()
@@ -19,6 +20,7 @@ public class Bullet : GenericBullet
     public override void OnCollisionEnter2D(Collision2D collision)
     {
         lifeTime = 1.5f;
+        collision.gameObject.GetComponent<EnemyController>().TakeDamage(dmg);
         Shoot.instance.Push(gameObject);
     }
 

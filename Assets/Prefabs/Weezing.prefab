@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8792461677555266704}
   - component: {fileID: 8686809519771124548}
   - component: {fileID: -3491096801384095919}
+  - component: {fileID: 3029154030322763205}
   m_Layer: 6
   m_Name: Weezing
   m_TagString: Weezing
@@ -280,3 +281,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!256 &3029154030322763205
+FrictionJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8416516802035981904}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_BreakAction: 3
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: -0.99798375, y: 6.44023}
+  m_MaxForce: 1
+  m_MaxTorque: 1
