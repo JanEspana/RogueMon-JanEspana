@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1557729479660053001}
   - component: {fileID: -4147825045321850262}
   - component: {fileID: 3956430955028970869}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ParticleGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}

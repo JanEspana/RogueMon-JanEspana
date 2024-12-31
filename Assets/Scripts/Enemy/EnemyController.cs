@@ -6,8 +6,9 @@ using UnityEngine;
 public abstract class EnemyController : MonoBehaviour
 {
     public string enemyType;
+    public GameObject lifeBar, lifeBarFrame;
     public StatesSO currentState;
-    public float HP, dmg;
+    public float HP;
     public GameObject player;
     public ChaseScript chase;
     public KaboomScript kaboom;
@@ -15,6 +16,8 @@ public abstract class EnemyController : MonoBehaviour
 
     public void Start()
     {
+        lifeBarFrame = transform.GetChild(0).gameObject;
+        lifeBar = transform.GetChild(1).gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
         chase = GetComponent<ChaseScript>();
         switch (enemyType)
@@ -47,6 +50,8 @@ public abstract class EnemyController : MonoBehaviour
     internal void TakeDamage(float dmg)
     {
         HP -= dmg;
+        lifeBar.transform.localScale = new Vector3(HP / 40, lifeBar.transform.localScale.y, lifeBar.transform.localScale.z);
+        lifeBar.transform.localPosition = new Vector3(-lifeBarFrame.transform.localScale.x / 2 + lifeBar.transform.localScale.x / 2, lifeBar.transform.localPosition.y, lifeBar.transform.localPosition.z);
         CheckIfAlive();
     }
 }
