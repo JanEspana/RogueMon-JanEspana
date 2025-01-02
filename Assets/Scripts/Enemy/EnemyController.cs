@@ -18,6 +18,8 @@ public abstract class EnemyController : MonoBehaviour
     {
         lifeBarFrame = transform.GetChild(0).gameObject;
         lifeBar = transform.GetChild(1).gameObject;
+        lifeBarFrame.GetComponent<SpriteRenderer>().enabled = false;
+        lifeBar.GetComponent<SpriteRenderer>().enabled = false;
         player = GameObject.FindGameObjectWithTag("Player");
         chase = GetComponent<ChaseScript>();
         switch (enemyType)

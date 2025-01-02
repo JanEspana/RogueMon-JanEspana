@@ -13,6 +13,8 @@ public class DungeonGen : MonoBehaviour
     private List<GameObject> roomInstances;
     public List<GameObject> roomPrefabs, enemyPrefabs, propPrefabs;
     private List<GameObject> enemyInstances;
+
+    public GameObject waterBG;
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");

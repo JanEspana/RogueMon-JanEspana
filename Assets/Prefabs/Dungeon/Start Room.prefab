@@ -2147,7 +2147,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2225,7 +2225,9 @@ MonoBehaviour:
   - {fileID: 7981634490142909174}
   - {fileID: 7536034660343920788}
   - {fileID: 7742280724065625806}
+  enemies: []
   dungeonGen: {fileID: 0}
+  isOpen: 0
 --- !u!61 &-702220809065928197
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3496,7 +3498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88806804fe72fa040bf29c2db704a9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 1
+  isValid: 0
   room: {fileID: -2951406450801023660}
 --- !u!61 &1554661405731768414
 BoxCollider2D:
@@ -3702,7 +3704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88806804fe72fa040bf29c2db704a9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
+  isValid: 0
   room: {fileID: -2951406450801023660}
 --- !u!483693784 &8521401479410555155
 TilemapRenderer:
@@ -3945,7 +3947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88806804fe72fa040bf29c2db704a9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
+  isValid: 0
   room: {fileID: -2951406450801023660}
 --- !u!483693784 &1540143337526112050
 TilemapRenderer:
@@ -4249,7 +4251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88806804fe72fa040bf29c2db704a9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 0
+  isValid: 0
   room: {fileID: -2951406450801023660}
 --- !u!61 &8586896740615288731
 BoxCollider2D:

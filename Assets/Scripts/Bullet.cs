@@ -25,6 +25,11 @@ public class Bullet : GenericBullet
             lifeTime = 1.5f;
             Shoot.instance.Push(gameObject);
         }
+        else
+        {
+            lifeTime = 1.5f;
+            Shoot.instance.Push(gameObject);
+        }
     }
 
     public override void EndOfLifeTime()

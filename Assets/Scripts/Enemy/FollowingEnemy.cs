@@ -17,6 +17,8 @@ public class FollowingEnemy : EnemyController
         if (other.gameObject.CompareTag("Player"))
         {
             GoToState<ChaseState>();
+            lifeBarFrame.GetComponent<SpriteRenderer>().enabled = true;
+            lifeBar.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -24,6 +26,8 @@ public class FollowingEnemy : EnemyController
         if (other.gameObject.CompareTag("Player"))
         {
             GoToState<IdleState>();
+            lifeBarFrame.GetComponent<SpriteRenderer>().enabled = false;
+            lifeBar.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

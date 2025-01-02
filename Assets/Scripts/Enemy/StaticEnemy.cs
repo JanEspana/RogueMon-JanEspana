@@ -20,6 +20,8 @@ public class StaticEnemy : EnemyController
         if (other.gameObject.CompareTag("Player"))
         {
             GoToState<AttackState>();
+            lifeBarFrame.GetComponent<SpriteRenderer>().enabled = true;
+            lifeBar.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -27,6 +29,8 @@ public class StaticEnemy : EnemyController
         if (other.gameObject.CompareTag("Player"))
         {
             GoToState<IdleState>();
+            lifeBarFrame.GetComponent<SpriteRenderer>().enabled = false;
+            lifeBar.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }
