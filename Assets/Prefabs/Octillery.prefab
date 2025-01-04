@@ -283,6 +283,7 @@ MonoBehaviour:
   chase: {fileID: 0}
   kaboom: {fileID: 0}
   shoot: {fileID: 0}
+  coin: {fileID: 988444460086119419, guid: c25e615da1c0fc944aee575f306437e3, type: 3}
   octillery: {fileID: 0}
 --- !u!114 &582188961971820657
 MonoBehaviour:

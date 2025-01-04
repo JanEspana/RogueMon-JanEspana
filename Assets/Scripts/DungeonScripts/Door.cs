@@ -15,8 +15,6 @@ public class Door : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
-        player = GameObject.FindGameObjectWithTag("Player");
-        mainCamera.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
         room = GetComponentInParent<Room>();
         doorSprite = GetComponent<TilemapRenderer>();
         doorSprite.enabled = false;

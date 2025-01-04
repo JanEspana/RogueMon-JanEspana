@@ -127,15 +127,6 @@ public partial class @InputController: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PinecoLauncher"",
-                    ""type"": ""Button"",
-                    ""id"": ""b2b31c8b-100f-400f-bb4d-8bd3079877ca"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""UseWeapon"",
                     ""type"": ""Button"",
                     ""id"": ""824b9ec9-9294-4d68-bb0b-b2b3631187c8"",
@@ -181,23 +172,40 @@ public partial class @InputController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1b4bcf98-6fcd-4d45-a81a-28af90e918d2"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PinecoLauncher"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c356480e-7dd8-42eb-a75d-34c9d7f8551e"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""99d0512c-f632-4a5a-8d60-b8563a1129cf"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e793b40-5b8e-4119-a6df-88f7607001cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""242a16ab-253e-4322-a855-141f665bb0e9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -214,8 +222,10 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         m_Weapon_Clobbopus = m_Weapon.FindAction("Clobbopus", throwIfNotFound: true);
         m_Weapon_Clauncher = m_Weapon.FindAction("Clauncher", throwIfNotFound: true);
         m_Weapon_Magby = m_Weapon.FindAction("Magby", throwIfNotFound: true);
-        m_Weapon_PinecoLauncher = m_Weapon.FindAction("PinecoLauncher", throwIfNotFound: true);
         m_Weapon_UseWeapon = m_Weapon.FindAction("UseWeapon", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -326,7 +336,6 @@ public partial class @InputController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Weapon_Clobbopus;
     private readonly InputAction m_Weapon_Clauncher;
     private readonly InputAction m_Weapon_Magby;
-    private readonly InputAction m_Weapon_PinecoLauncher;
     private readonly InputAction m_Weapon_UseWeapon;
     public struct WeaponActions
     {
@@ -335,7 +344,6 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         public InputAction @Clobbopus => m_Wrapper.m_Weapon_Clobbopus;
         public InputAction @Clauncher => m_Wrapper.m_Weapon_Clauncher;
         public InputAction @Magby => m_Wrapper.m_Weapon_Magby;
-        public InputAction @PinecoLauncher => m_Wrapper.m_Weapon_PinecoLauncher;
         public InputAction @UseWeapon => m_Wrapper.m_Weapon_UseWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
@@ -355,9 +363,6 @@ public partial class @InputController: IInputActionCollection2, IDisposable
             @Magby.started += instance.OnMagby;
             @Magby.performed += instance.OnMagby;
             @Magby.canceled += instance.OnMagby;
-            @PinecoLauncher.started += instance.OnPinecoLauncher;
-            @PinecoLauncher.performed += instance.OnPinecoLauncher;
-            @PinecoLauncher.canceled += instance.OnPinecoLauncher;
             @UseWeapon.started += instance.OnUseWeapon;
             @UseWeapon.performed += instance.OnUseWeapon;
             @UseWeapon.canceled += instance.OnUseWeapon;
@@ -374,9 +379,6 @@ public partial class @InputController: IInputActionCollection2, IDisposable
             @Magby.started -= instance.OnMagby;
             @Magby.performed -= instance.OnMagby;
             @Magby.canceled -= instance.OnMagby;
-            @PinecoLauncher.started -= instance.OnPinecoLauncher;
-            @PinecoLauncher.performed -= instance.OnPinecoLauncher;
-            @PinecoLauncher.canceled -= instance.OnPinecoLauncher;
             @UseWeapon.started -= instance.OnUseWeapon;
             @UseWeapon.performed -= instance.OnUseWeapon;
             @UseWeapon.canceled -= instance.OnUseWeapon;
@@ -397,6 +399,52 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         }
     }
     public WeaponActions @Weapon => new WeaponActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Pause;
+    public struct UIActions
+    {
+        private @InputController m_Wrapper;
+        public UIActions(@InputController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_UI_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -406,7 +454,10 @@ public partial class @InputController: IInputActionCollection2, IDisposable
         void OnClobbopus(InputAction.CallbackContext context);
         void OnClauncher(InputAction.CallbackContext context);
         void OnMagby(InputAction.CallbackContext context);
-        void OnPinecoLauncher(InputAction.CallbackContext context);
         void OnUseWeapon(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }

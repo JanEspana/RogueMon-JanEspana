@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,16 +9,14 @@ public class Player : MonoBehaviour
     public GameObject lifeBar;
     public float maxHP = 10;
     public int weaponsObtained;
-    public int score;
+    public int coins;
+    TextMeshProUGUI coinText;
+    public GameObject blackOutScreen;
     // Start is called before the first frame update
     void Start()
     {
-        HP = maxHP;
-        weaponsObtained = 0;
-        score = 0;
-        lifeBar.GetComponent<UnityEngine.UI.Slider>().maxValue = maxHP;
-        lifeBar.GetComponent<UnityEngine.UI.Slider>().value = HP;
-        lifeBar.GetComponent<UnityEngine.UI.Slider>().fillRect.GetComponent<UnityEngine.UI.Image>().color = Color.green;
+        SetPlayerValues();
+        SetWeaponValues();
     }
 
     // Update is called once per frame
@@ -43,13 +42,31 @@ public class Player : MonoBehaviour
         
         if (HP <= 0)
         {
-            Die();
+            GameOverScreen();
         }
     }
-    public void Die()
+    void GameOverScreen()
     {
-        Debug.Log("U dumbass nigga");
+        blackOutScreen.SetActive(true);
+    }
+    public void SetPlayerValues()
+    {
         transform.position = new Vector3(0, 0, 0);
-        Start();
+        Camera.main.transform.position = new Vector3(0.5f, 0, -10);
+        HP = maxHP;
+        weaponsObtained = 0;
+        coins = 0;
+        coinText = GameObject.Find("CoinAmount").GetComponent<TextMeshProUGUI>();
+        coinText.text = coins.ToString();
+        lifeBar.GetComponent<UnityEngine.UI.Slider>().maxValue = maxHP;
+        lifeBar.GetComponent<UnityEngine.UI.Slider>().value = HP;
+        lifeBar.GetComponent<UnityEngine.UI.Slider>().fillRect.GetComponent<UnityEngine.UI.Image>().color = Color.green;
+    }
+    public void SetWeaponValues()
+    {
+        Shoot shoot = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Shoot>();
+        Flamethrower flamethrower = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Flamethrower>();
+        shoot.isObtained = false;
+        flamethrower.isObtained = false;
     }
 }

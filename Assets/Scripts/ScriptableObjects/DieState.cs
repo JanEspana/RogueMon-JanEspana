@@ -8,6 +8,7 @@ public class DieState : StatesSO
     public override void OnStateEnter(EnemyController ec)
     {
         Debug.Log("Die State");
+        DungeonGen.instance.enemyInstances.Remove(ec.gameObject);
         Destroy(ec.gameObject);
     }
 
