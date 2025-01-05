@@ -7,6 +7,8 @@ public class Pause : MonoBehaviour, InputController.IUIActions
 {
     bool isPaused;
     public GameObject pauseUI, gameUI;
+    public AudioSource audioSource;
+    public AudioClip menuOpenSound;
     void Awake()
     {
         InputController inputController = new InputController();
@@ -21,6 +23,7 @@ public class Pause : MonoBehaviour, InputController.IUIActions
     {
         if (context.performed && !isPaused)
         {
+            audioSource.PlayOneShot(menuOpenSound);
             isPaused = true;
             pauseUI.SetActive(true);
             gameUI.SetActive(false);

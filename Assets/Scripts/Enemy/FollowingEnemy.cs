@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FollowingEnemy : EnemyController
 {
+    public AudioSource audioSource;
+    public AudioClip cry;
     private void OnEnable()
     {
         enemyType = "Weezing";
@@ -19,6 +21,7 @@ public class FollowingEnemy : EnemyController
             GoToState<ChaseState>();
             lifeBarFrame.GetComponent<SpriteRenderer>().enabled = true;
             lifeBar.GetComponent<SpriteRenderer>().enabled = true;
+            audioSource.PlayOneShot(cry);
         }
     }
     void OnTriggerExit2D(Collider2D other)
