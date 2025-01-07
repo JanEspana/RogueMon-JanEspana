@@ -32,6 +32,18 @@ public class ButtonManager : MonoBehaviour
             }
             coinText.text = player.coins.ToString();
             lifeBar.GetComponent<UnityEngine.UI.Slider>().value = player.HP;
+            if (player.HP > player.maxHP / 2)
+            {
+                lifeBar.GetComponent<UnityEngine.UI.Slider>().fillRect.GetComponent<UnityEngine.UI.Image>().color = Color.green;
+            }
+            else if (player.HP <= player.maxHP / 2 && player.HP > player.maxHP / 4)
+            {
+                lifeBar.GetComponent<UnityEngine.UI.Slider>().fillRect.GetComponent<UnityEngine.UI.Image>().color = Color.yellow;
+            }
+            else if (player.HP <= player.maxHP / 4)
+            {
+                lifeBar.GetComponent<UnityEngine.UI.Slider>().fillRect.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+            }
         }
     }
     public void UnlockClauncher()
