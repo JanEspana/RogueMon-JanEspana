@@ -28,7 +28,7 @@ public class Flame : MonoBehaviour
     {
         if (other.gameObject.layer == 6)
         {
-            float dmg = Random.Range(0.1f, 0.5f);
+            float dmg = Random.Range(0.05f, 0.2f);
             other.GetComponent<EnemyController>().TakeDamage(dmg);
         }
     }

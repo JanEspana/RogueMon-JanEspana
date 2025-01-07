@@ -105,15 +105,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PinecoLauncher",
-                    "type": "Button",
-                    "id": "b2b31c8b-100f-400f-bb4d-8bd3079877ca",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "UseWeapon",
                     "type": "Button",
                     "id": "824b9ec9-9294-4d68-bb0b-b2b3631187c8",
@@ -159,23 +150,40 @@
                 },
                 {
                     "name": "",
-                    "id": "1b4bcf98-6fcd-4d45-a81a-28af90e918d2",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PinecoLauncher",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c356480e-7dd8-42eb-a75d-34c9d7f8551e",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "UseWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "99d0512c-f632-4a5a-8d60-b8563a1129cf",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "8e793b40-5b8e-4119-a6df-88f7607001cf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "242a16ab-253e-4322-a855-141f665bb0e9",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

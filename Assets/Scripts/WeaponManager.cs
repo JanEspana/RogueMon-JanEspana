@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -19,14 +18,12 @@ public class WeaponManager : MonoBehaviour, InputController.IWeaponActions
     private Image clobImage;
     private Image claunchImage;
     private Image magImage;
-    private Image pinecoImage;
 
     void Start()
     {
         clobImage = GameObject.Find("Clobbopus").GetComponent<Image>();
         claunchImage = GameObject.Find("Clauncher").GetComponent<Image>();
         magImage = GameObject.Find("Magby").GetComponent<Image>();
-        pinecoImage = GameObject.Find("Pineco").GetComponent<Image>();
 
         clobbopus = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Melee>();
         clauncher = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Shoot>();
@@ -77,14 +74,6 @@ public class WeaponManager : MonoBehaviour, InputController.IWeaponActions
             SelectImage();
         }
     }
-    public void OnPinecoLauncher(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            weaponIndex = 3;
-            SelectImage();
-        }
-    }
 
     public void OnUseWeapon(InputAction.CallbackContext context)
     {
@@ -101,9 +90,6 @@ public class WeaponManager : MonoBehaviour, InputController.IWeaponActions
                 case 2:
                     magby.UseFlamethrower();
                     break;
-                case 3:
-                    // Pineco Launcher
-                    break;
             }
             StartCoroutine(Cooldown());
         }
@@ -116,25 +102,21 @@ public class WeaponManager : MonoBehaviour, InputController.IWeaponActions
                 clobImage.color = Color.white;
                 claunchImage.color = Color.grey;
                 magImage.color = Color.grey;
-                pinecoImage.color = Color.grey;
                 break;
             case 1:
                 clobImage.color = Color.grey;
                 claunchImage.color = Color.white;
                 magImage.color = Color.grey;
-                pinecoImage.color = Color.grey;
                 break;
             case 2:
                 clobImage.color = Color.grey;
                 claunchImage.color = Color.grey;
                 magImage.color = Color.white;
-                pinecoImage.color = Color.grey;
                 break;
             case 3:
                 clobImage.color = Color.grey;
                 claunchImage.color = Color.grey;
                 magImage.color = Color.grey;
-                pinecoImage.color = Color.white;
                 break;
         }
     }

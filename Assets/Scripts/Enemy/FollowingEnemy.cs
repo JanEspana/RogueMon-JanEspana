@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowingEnemy : EnemyController
 {
+    public AudioSource audioSource;
+    public AudioClip cry;
     private void OnEnable()
     {
         enemyType = "Weezing";
@@ -17,6 +17,9 @@ public class FollowingEnemy : EnemyController
         if (other.gameObject.CompareTag("Player"))
         {
             GoToState<ChaseState>();
+            lifeBarFrame.GetComponent<SpriteRenderer>().enabled = true;
+            lifeBar.GetComponent<SpriteRenderer>().enabled = true;
+            audioSource.PlayOneShot(cry);
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -24,6 +27,8 @@ public class FollowingEnemy : EnemyController
         if (other.gameObject.CompareTag("Player"))
         {
             GoToState<IdleState>();
+            lifeBarFrame.GetComponent<SpriteRenderer>().enabled = false;
+            lifeBar.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

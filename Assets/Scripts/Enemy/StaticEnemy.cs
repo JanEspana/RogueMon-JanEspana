@@ -1,11 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StaticEnemy : EnemyController
 {
     public Transform octillery;
+    public AudioSource audioSource;
+    public AudioClip cry;
     private void OnEnable()
     {
         enemyType = "Octillery";
@@ -20,6 +19,9 @@ public class StaticEnemy : EnemyController
         if (other.gameObject.CompareTag("Player"))
         {
             GoToState<AttackState>();
+            lifeBarFrame.GetComponent<SpriteRenderer>().enabled = true;
+            lifeBar.GetComponent<SpriteRenderer>().enabled = true;
+            audioSource.PlayOneShot(cry);
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -27,6 +29,8 @@ public class StaticEnemy : EnemyController
         if (other.gameObject.CompareTag("Player"))
         {
             GoToState<IdleState>();
+            lifeBarFrame.GetComponent<SpriteRenderer>().enabled = false;
+            lifeBar.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }

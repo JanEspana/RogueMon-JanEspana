@@ -5,10 +5,11 @@ using UnityEngine;
 public class EnemyBullet : GenericBullet
 {
     public GameObject player;
+    public float dmg;
     public Vector3 dir;
     public override void OnEnable()
     {
-
+        dmg = 1;
         force = 0.3f;
         lifeTime = 1.5f;
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +24,10 @@ public class EnemyBullet : GenericBullet
         {
             lifeTime = 1.5f;
             EnemyShoot.instance.Push(gameObject);
+            if (collision.gameObject == player)
+            {
+                collision.gameObject.GetComponent<Player>().TakeDamage(dmg);
+            }
         }
     }
     public override void EndOfLifeTime()

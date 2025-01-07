@@ -1,17 +1,18 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Door : MonoBehaviour
 {
+    public Camera mainCamera;
+    public GameObject player;
     public bool isValid;
     public Room room;
     TilemapRenderer doorSprite;
     BoxCollider2D doorCollider;
     private void Awake()
     {
+        mainCamera = Camera.main;
         room = GetComponentInParent<Room>();
         doorSprite = GetComponent<TilemapRenderer>();
         doorSprite.enabled = false;
@@ -87,18 +88,23 @@ public class Door : MonoBehaviour
             if (doorDirection == Directions.UP)
             {
                 player.transform.position += new Vector3(0, 4.2f, 0);
+                //move also the camera.
+                mainCamera.transform.position += new Vector3(0, 10f, 0);
             }
             else if (doorDirection == Directions.DOWN)
             {
                 player.transform.position += new Vector3(0, -4.2f, 0);
+                mainCamera.transform.position += new Vector3(0, -10f, 0);
             }
             else if (doorDirection == Directions.LEFT)
             {
                 player.transform.position += new Vector3(-4.2f, 0, 0);
+                mainCamera.transform.position += new Vector3(-19f, 0, 0);
             }
             else if (doorDirection == Directions.RIGHT)
             {
                 player.transform.position += new Vector3(4.2f, 0, 0);
+                mainCamera.transform.position += new Vector3(19f, 0, 0);
             }
         }
     }

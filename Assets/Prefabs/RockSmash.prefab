@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1678174048253888088}
   - component: {fileID: 2347568094280684028}
   - component: {fileID: 12452932230125096}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RockSmash
   m_TagString: Untagged
   m_Icon: {fileID: 0}

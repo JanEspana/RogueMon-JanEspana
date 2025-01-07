@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,19 +11,23 @@ public class DungeonGen : MonoBehaviour
     private List<Room> dungeonRooms;
     private List<GameObject> roomInstances;
     public List<GameObject> roomPrefabs, enemyPrefabs, propPrefabs;
-    private List<GameObject> enemyInstances;
+    public List<GameObject> enemyInstances;
+    public GameObject endRoomPrefab;
+
+    public GameObject waterBG;
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         instance = this;
         GenerateDungeon();
+        CreateEndRoom();
         CheckPositions();
         AssignNeighbours();
-        EnableDoors();
         GenerateEnemies();
+        EnableDoors();
     }
 
-    void GenerateDungeon()
+    public void GenerateDungeon()
     {
         roomInstances = new List<GameObject>();
         enemyInstances = new List<GameObject>();
@@ -42,8 +45,8 @@ public class DungeonGen : MonoBehaviour
             if (i == 0)
             {
                 roomInstances.Add(new GameObject());
-                roomInstances[i] = Instantiate(SearchStartRoom().gameObject, new Vector3(0, 0, 0), Quaternion.identity);
-                newRoom = roomInstances[i].GetComponent<Room>();
+                roomInstances[0] = Instantiate(SearchStartRoom().gameObject, new Vector3(0, 0, 0), Quaternion.identity);
+                newRoom = roomInstances[0].GetComponent<Room>();
                 roomsPending.Enqueue(newRoom);
                 dungeonRooms.Add(newRoom);
                 newRoom.isStartRoom = true;
@@ -67,16 +70,58 @@ public class DungeonGen : MonoBehaviour
                 }
                 else
                 {
-                    do
+                    direction = (Directions)UnityEngine.Random.Range(0, 4);
+                    if (IsRoomImposible(newRoom))
                     {
-                        direction = (Directions)UnityEngine.Random.Range(0, 4);
+                        Debug.Log("Imposible room");
+                        Destroy(roomInstances[i]);
+                        roomInstances.RemoveAt(i);
+                        i--;
+                    }
+                    else
+                    {
                         MoveRoom(newRoom, direction);
-                    } while (IsOverlaping(newRoom));
+                        while (IsOverlaping(newRoom))
+                        {
+                            direction = (Directions)UnityEngine.Random.Range(0, 4);
+                            MoveRoom(newRoom, direction);
+                        }
+                    }
                 }
-                roomPosition = newRoom.transform;
             }
-
         }
+        Debug.Log(dungeonRooms.Count);
+    }
+    bool IsRoomImposible(Room room)
+    {
+        bool up = false, down = false, left = false, right = false;
+        foreach (Room otherRoom in dungeonRooms)
+        {
+            if (room != otherRoom)
+            {
+                if (room.transform.position + new Vector3(0, 10, 0) == otherRoom.transform.position)
+                {
+                    up = true;
+                }
+                if (room.transform.position + new Vector3(0, -10, 0) == otherRoom.transform.position)
+                {
+                    down = true;
+                }
+                if (room.transform.position + new Vector3(-19, 0, 0) == otherRoom.transform.position)
+                {
+                    left = true;
+                }
+                if (room.transform.position + new Vector3(19, 0, 0) == otherRoom.transform.position)
+                {
+                    right = true;
+                }
+            }
+            if (up == down == left == right == false)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     bool IsOverlaping(Room room)
     {
@@ -86,6 +131,7 @@ public class DungeonGen : MonoBehaviour
             {
                 if (room.transform.position == otherRoom.transform.position)
                 {
+                    Debug.Log("Overlaping");
                     return true;
                 }
             }
@@ -139,7 +185,7 @@ public class DungeonGen : MonoBehaviour
                 break;
         }
     }
-    void CheckPositions()
+    public void CheckPositions()
     {
         foreach (Room room in dungeonRooms)
         {
@@ -206,7 +252,7 @@ public class DungeonGen : MonoBehaviour
                 int enemyCount = UnityEngine.Random.Range(1, 4);
                 for (int j = 0; j < enemyCount; j++)
                 {
-                    GameObject newEnemy, previousEnemy;
+                    GameObject newEnemy;
                     Vector3 offset = new Vector3(UnityEngine.Random.Range(-5, 5), UnityEngine.Random.Range(-3, 3), 0);
                     Vector3 enemyPosition = room.transform.position + offset;
                     while (Physics2D.OverlapCircle(enemyPosition, 1, LayerMask.GetMask("Void")))
@@ -221,5 +267,51 @@ public class DungeonGen : MonoBehaviour
                 }
             }
         }
+    }
+    public void CreateEndRoom()
+    {
+        Room lastRoom = dungeonRooms[dungeonRooms.Count - 1];
+        GameObject endRoom = Instantiate(endRoomPrefab, lastRoom.transform.position, Quaternion.identity);
+        Room endRoomScript = endRoom.GetComponent<Room>();
+        roomInstances.Add(endRoom);
+        dungeonRooms.Add(endRoomScript);
+        endRoomScript.isStartRoom = false;
+        //move it to a free position
+        Directions direction = (Directions)UnityEngine.Random.Range(0, 4);
+        MoveRoom(endRoomScript, direction);
+        while (IsOverlaping(endRoomScript))
+        {
+            direction = (Directions)UnityEngine.Random.Range(0, 4);
+            MoveRoom(endRoomScript, direction);
+        }
+    }
+    public void ResetDungeon()
+    {
+        //black screen
+
+        dungeonRooms.Clear();
+
+        player.transform.position = new Vector3(0, 0, 0);
+        Camera.main.transform.position = new Vector3(0.5f, 0, -10);
+
+        foreach (GameObject room in roomInstances)
+        {
+            Destroy(room);
+        }
+        foreach (GameObject enemy in enemyInstances)
+        {
+            Destroy(enemy);
+        }
+        StartCoroutine(Regenerate());
+    }
+    IEnumerator Regenerate()
+    {
+        yield return new WaitForSeconds(0.01f);
+        GenerateDungeon();
+        CreateEndRoom();
+        CheckPositions();
+        AssignNeighbours();
+        GenerateEnemies();
+        EnableDoors();
     }
 }

@@ -19,9 +19,17 @@ public class Bullet : GenericBullet
     // Update is called once per frame
     public override void OnCollisionEnter2D(Collision2D collision)
     {
-        lifeTime = 1.5f;
-        collision.gameObject.GetComponent<EnemyController>().TakeDamage(dmg);
-        Shoot.instance.Push(gameObject);
+        if (collision.gameObject.layer == 6)
+        {
+            collision.gameObject.GetComponent<EnemyController>().TakeDamage(dmg);
+            lifeTime = 1.5f;
+            Shoot.instance.Push(gameObject);
+        }
+        else
+        {
+            lifeTime = 1.5f;
+            Shoot.instance.Push(gameObject);
+        }
     }
 
     public override void EndOfLifeTime()

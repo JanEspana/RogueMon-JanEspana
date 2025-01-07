@@ -1,20 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class EnemyController : MonoBehaviour
 {
     public string enemyType;
+    public GameObject lifeBar, lifeBarFrame;
     public StatesSO currentState;
-    public float HP, dmg;
+    public float HP;
     public GameObject player;
     public ChaseScript chase;
     public KaboomScript kaboom;
     public EnemyShoot shoot;
+    public GameObject coin;
 
     public void Start()
     {
+        lifeBarFrame = transform.GetChild(0).gameObject;
+        lifeBar = transform.GetChild(1).gameObject;
+        lifeBarFrame.GetComponent<SpriteRenderer>().enabled = false;
+        lifeBar.GetComponent<SpriteRenderer>().enabled = false;
         player = GameObject.FindGameObjectWithTag("Player");
         chase = GetComponent<ChaseScript>();
         switch (enemyType)
@@ -40,6 +43,7 @@ public abstract class EnemyController : MonoBehaviour
     {
         if (HP <= 0)
         {
+            DropCoin();
             GoToState<DieState>();
         }
     }
@@ -47,6 +51,12 @@ public abstract class EnemyController : MonoBehaviour
     internal void TakeDamage(float dmg)
     {
         HP -= dmg;
+        lifeBar.transform.localScale = new Vector3(HP / 40, lifeBar.transform.localScale.y, lifeBar.transform.localScale.z);
+        lifeBar.transform.localPosition = new Vector3(-lifeBarFrame.transform.localScale.x / 2 + lifeBar.transform.localScale.x / 2, lifeBar.transform.localPosition.y, lifeBar.transform.localPosition.z);
         CheckIfAlive();
+    }
+    void DropCoin()
+    {
+        Instantiate(coin, transform.position, Quaternion.identity);
     }
 }
