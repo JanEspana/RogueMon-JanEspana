@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public abstract class EnemyController : MonoBehaviour
@@ -11,6 +12,7 @@ public abstract class EnemyController : MonoBehaviour
     public KaboomScript kaboom;
     public EnemyShoot shoot;
     public GameObject coin;
+    TextMeshProUGUI scoreText;
 
     public void Start()
     {

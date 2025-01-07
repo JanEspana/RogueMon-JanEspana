@@ -15,6 +15,9 @@ public class Stairs : MonoBehaviour
     {
         if (room.isOpen)
         {
+            Player player = collision.gameObject.GetComponent<Player>();
+            player.score += 500;
+            player.scoreText.text = player.score.ToString();
             dungeonGen.ResetDungeon();
         }
     }
