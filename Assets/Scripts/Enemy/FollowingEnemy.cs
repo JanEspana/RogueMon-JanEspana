@@ -4,6 +4,7 @@ public class FollowingEnemy : EnemyController
 {
     public AudioSource audioSource;
     public AudioClip cry;
+
     private void OnEnable()
     {
         enemyType = "Weezing";

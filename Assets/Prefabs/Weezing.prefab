@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: Weezing
+  rb: {fileID: 0}
   lifeBar: {fileID: 0}
   lifeBarFrame: {fileID: 0}
   currentState: {fileID: 11400000, guid: 09a3af675ec9e2b46ab906bda88d4aff, type: 2}
@@ -430,7 +431,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
