@@ -10,6 +10,7 @@ public class Door : MonoBehaviour
     public Room room;
     TilemapRenderer doorSprite;
     BoxCollider2D doorCollider;
+    GameObject background;
     private void Awake()
     {
         mainCamera = Camera.main;
@@ -19,6 +20,7 @@ public class Door : MonoBehaviour
         doorCollider = GetComponent<BoxCollider2D>();
         doorCollider.enabled = false;
         isValid = false;
+        background = GameObject.Find("BG");
     }
     void Update()
     {
@@ -88,7 +90,6 @@ public class Door : MonoBehaviour
             if (doorDirection == Directions.UP)
             {
                 player.transform.position += new Vector3(0, 4.2f, 0);
-                //move also the camera.
                 mainCamera.transform.position += new Vector3(0, 10f, 0);
             }
             else if (doorDirection == Directions.DOWN)
@@ -106,6 +107,7 @@ public class Door : MonoBehaviour
                 player.transform.position += new Vector3(4.2f, 0, 0);
                 mainCamera.transform.position += new Vector3(19f, 0, 0);
             }
+            background.transform.position = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, 0);
         }
     }
 }
