@@ -6,7 +6,7 @@ public class Background : MonoBehaviour
 {
     public GameObject background;
     public GameObject player;
-    public float speedOffset = 2f;
+    public float speedOffset;
     // Start is called before the first frame update
     private void Update()
     {
