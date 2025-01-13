@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
     public GameObject lifeBar;
     public float maxHP = 10;
     public int weaponsObtained;
-    public int coins;
-    TextMeshProUGUI coinText;
+    public int coins, score;
+    public TextMeshProUGUI coinText, scoreText;
     public GameObject blackOutScreen;
     // Start is called before the first frame update
     void Start()
@@ -54,8 +54,12 @@ public class Player : MonoBehaviour
         HP = maxHP;
         weaponsObtained = 0;
         coins = 0;
+        score = 0;
         coinText = GameObject.Find("CoinAmount").GetComponent<TextMeshProUGUI>();
+        scoreText = GameObject.Find("ScoreAmount").GetComponent<TextMeshProUGUI>();
         coinText.text = coins.ToString();
+        scoreText.text = score.ToString();
+
         lifeBar.GetComponent<UnityEngine.UI.Slider>().maxValue = maxHP;
         lifeBar.GetComponent<UnityEngine.UI.Slider>().value = HP;
         lifeBar.GetComponent<UnityEngine.UI.Slider>().fillRect.GetComponent<UnityEngine.UI.Image>().color = Color.green;

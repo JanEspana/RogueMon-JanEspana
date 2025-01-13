@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Punch : MonoBehaviour
@@ -43,8 +44,15 @@ public class Punch : MonoBehaviour
         lifeTime = 0.5f;
         if (collision.gameObject.layer == 6)
         {
+            if (collision.gameObject.GetComponent<EnemyController>().enemyType == "Weezing")
+            {
+                collision.gameObject.GetComponent<EnemyController>().GoToState<StunState>();
+            }
             collision.gameObject.GetComponent<EnemyController>().TakeDamage(dmg);
-            rb.AddForce(spawnPoint.transform.right * force, ForceMode2D.Impulse);
+        }
+        else
+        {
+            Melee.instance.Push(gameObject);
         }
     }
     void EndOfLifeTime()

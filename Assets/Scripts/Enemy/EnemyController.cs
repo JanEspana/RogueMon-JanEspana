@@ -1,8 +1,11 @@
+using System;
+using TMPro;
 using UnityEngine;
 
 public abstract class EnemyController : MonoBehaviour
 {
     public string enemyType;
+    public Rigidbody2D rb;
     public GameObject lifeBar, lifeBarFrame;
     public StatesSO currentState;
     public float HP;
@@ -11,9 +14,11 @@ public abstract class EnemyController : MonoBehaviour
     public KaboomScript kaboom;
     public EnemyShoot shoot;
     public GameObject coin;
+    TextMeshProUGUI scoreText;
 
     public void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         lifeBarFrame = transform.GetChild(0).gameObject;
         lifeBar = transform.GetChild(1).gameObject;
         lifeBarFrame.GetComponent<SpriteRenderer>().enabled = false;

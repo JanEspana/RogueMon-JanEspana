@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class WeaponManager : MonoBehaviour, InputController.IWeaponActions
 {
     bool canUse = true;
-    float cooldown = 0.5f;
+    float shootCooldown = 0.5f, punchCooldown = 1.5f;
     public InputController ic;
 
     public Melee clobbopus;
@@ -83,15 +83,16 @@ public class WeaponManager : MonoBehaviour, InputController.IWeaponActions
             {
                 case 0:
                     clobbopus.RockSmash();
+                    StartCoroutine(Cooldown(punchCooldown));
                     break;
                 case 1:
                     clauncher.WaterGun();
+                    StartCoroutine(Cooldown(shootCooldown));
                     break;
                 case 2:
                     magby.UseFlamethrower();
                     break;
             }
-            StartCoroutine(Cooldown());
         }
     }
     void SelectImage()
@@ -120,7 +121,7 @@ public class WeaponManager : MonoBehaviour, InputController.IWeaponActions
                 break;
         }
     }
-    IEnumerator Cooldown()
+    IEnumerator Cooldown(float cooldown)
     {
         canUse = false;
         yield return new WaitForSeconds(cooldown);
