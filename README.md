@@ -24,3 +24,6 @@ Cada piso tiene de 9 a 11 habitaciones, las cuales tendrán enemigos que derrota
 - Clobbopus: Un puño que aturde al rival durante un corto tiempo. Su velocidad de ataque es bastante corta.
 - Clauncher: Sniper que ataca desde lejos, su velocidad de ataque es elevada.
 - Magby: Lanzallamas que hace un pequeño daño entre 0,1 y 0,5 por cada partícula.
+
+### Cosas a comentar
+Las puertas ya sé que no las hice con eventos, porque no me enteré de que era así hasta que ya las tenía terminadas. En el caso de las armas como ScriptableObjects, pasó lo mismo. Por el resto, si está mal mea culpa
