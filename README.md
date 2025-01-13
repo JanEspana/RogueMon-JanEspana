@@ -7,6 +7,7 @@ Te encuentras en la abandonada Central Eléctrica de Kanto. Ha sido invadida por
 - WASD para moverte
 - Click para disparar
 - 1, 2 y 3 para cambiar de arma
+- Esc para abrir el menú
 
 ### Enemigos
 - Weezing: Se acerca a ti a una velocidad inferior a la tuya, pero puede flotar sobre los huecos de la mazmorra. Explota al tocarte.
