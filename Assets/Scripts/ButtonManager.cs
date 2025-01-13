@@ -51,7 +51,7 @@ public class ButtonManager : MonoBehaviour
         TextMeshProUGUI coinText = GameObject.Find("CoinAmount").GetComponent<TextMeshProUGUI>();
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         Shoot shoot = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Shoot>();
-        if (player.coins >= 15)
+        if (player.coins >= 15 && !shoot.isObtained)
         {
             player.coins -= 15;
             shoot.isObtained = true;
@@ -63,7 +63,7 @@ public class ButtonManager : MonoBehaviour
         TextMeshProUGUI coinText = GameObject.Find("CoinAmount").GetComponent<TextMeshProUGUI>();
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         Flamethrower flamethrower = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Flamethrower>();
-        if (player.coins >= 25)
+        if (player.coins >= 25 && !flamethrower.isObtained)
         {
             player.coins -= 25;
             flamethrower.isObtained = true;
