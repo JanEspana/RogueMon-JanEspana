@@ -7,8 +7,11 @@ public class GameOver : MonoBehaviour
 {
     public TextMeshProUGUI gameOverText;
     Player player;
+    PlayerMovement playerMovement;
     private void OnEnable()
     {
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        playerMovement.enabled = false;
         StartCoroutine(AnimateText());
     }
     IEnumerator AnimateText()
@@ -21,6 +24,7 @@ public class GameOver : MonoBehaviour
     }
     public void Restart()
     {
+        playerMovement.enabled = true;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         player.SetPlayerValues();
         player.SetWeaponValues();
